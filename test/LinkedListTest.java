@@ -86,14 +86,16 @@ public class LinkedListTest {
     @Test
     public void addingAndRemoving2MillionObjectsToFromTailShouldNotFail() {
         int count = 2000000;
-        for (int i = 0; i < count; i++)
-            validateReturnObject(linkedList.add(objects[i % 4]));
+        
+        validateReturnObject(linkedList.add(objects[0]));
+        for (int i = 1; i < count; i++)
+            validateReturnObject(linkedList.add(0, objects[i % 4]));
         
         assertFalse(linkedList.isEmpty());
         assertEquals(linkedList.size(), count);
         
         for (int i = count - 1; i >= 0; i--)
-            validateReturnObject(linkedList.remove(i), objects[i % 4]);
+            validateReturnObject(linkedList.remove(0), objects[i % 4]);
         
         assertTrue(linkedList.isEmpty());
         assertEquals(linkedList.size(), 0);

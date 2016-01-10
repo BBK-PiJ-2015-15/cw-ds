@@ -140,7 +140,7 @@ public class LinkedList implements List {
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
      *
-     * Complexity: O(1) if adding to head or tail, otherwise O(n).
+     * Complexity: O(1) if adding to head, otherwise O(n).
 	 * 
 	 * @param index The index at which the item should be inserted.
 	 * @param item The element to be inserted.
