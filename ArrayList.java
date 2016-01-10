@@ -109,8 +109,8 @@ public class ArrayList implements List {
         
         // move items starting at the index by 1 position (if not last item)
         if (index != (this.size - 1)) {
-            System.arraycopy(this.items, index + 1, this.items, index,
-                this.size - 1);
+            for (int i = index; i < (this.size - 1); i++)
+                this.items[i] = this.items[i + 1];
         }
         
         // update the number of items in array
@@ -157,7 +157,8 @@ public class ArrayList implements List {
             ensureCapacity(this.size + 1);
         
         // move items starting at the index by 1 position
-        System.arraycopy(this.items, index, this.items, index + 1, this.size);
+        for (int i = this.size; i > index; i--)
+            this.items[i] = this.items[i - 1];
         
         // copy the item and update the number of items in array
         items[index] = item;
@@ -217,8 +218,10 @@ public class ArrayList implements List {
             Object[] items = new Object[capacity];
             
             // copy the data
-            if (this.items != null && this.size > 0)
-                System.arraycopy(this.items, 0, items, 0, this.size);
+            if (this.items != null && this.size > 0) {
+                for (int i = 0; i < this.size; i++)
+                    items[i] = this.items[i];
+            }
             
             // update the array object to point to the new array
             this.items = items;

@@ -35,8 +35,10 @@ public class FunctionalArrayList extends ArrayList implements FunctionalList {
             newList.ensureCapacity(this.size - 1);
             
             // copy data and update the number of items stored
+            for (int i = 1; i < this.size; i++)
+                newList.items[i - 1] = this.items[i];
+            
             newList.size = this.size - 1;
-            System.arraycopy(this.items, 1, newList.items, 0, newList.size);
         }
         return newList;
     }
