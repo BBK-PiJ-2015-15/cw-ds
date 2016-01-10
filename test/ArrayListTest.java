@@ -5,7 +5,12 @@ import org.junit.*;
  * Implementation of the ArrayList test class.
  */
 public class ArrayListTest {
+    private Object[] objects;
     private ArrayList arrayList;
+
+    public ArrayListTest() {
+        objects = new Object[] { 0, "some object", 128, "xpto" };
+    }
 
     @Before
     public void createArrayList() {
@@ -82,17 +87,17 @@ public class ArrayListTest {
         assertFalse(arrayList.isEmpty());
         assertEquals(arrayList.size(), 3);
         
-        validateReturnObject(arrayList.remove(0));
+        validateReturnObject(arrayList.remove(0), 0);
         assertFalse(arrayList.isEmpty());
         assertEquals(arrayList.size(), 2);
         
         validateReturnObject(arrayList.get(0), 1);
-        validateReturnObject(arrayList.remove(1));
+        validateReturnObject(arrayList.remove(1), 2);
         assertFalse(arrayList.isEmpty());
         assertEquals(arrayList.size(), 1);
         
         validateReturnObject(arrayList.get(0), 1);
-        validateReturnObject(arrayList.remove(0));
+        validateReturnObject(arrayList.remove(0), 1);
         assertEquals(arrayList.capacity(), arrayList.INITIAL_CAPACITY);
         assertTrue(arrayList.isEmpty());
         assertEquals(arrayList.size(), 0);
@@ -102,16 +107,32 @@ public class ArrayListTest {
     public void removingLargeNumberOfObjectShouldReleaseMemory() {
         int count = 1024 + 1;
         for (int i = 0; i < count; i++)
-            validateReturnObject(arrayList.add(i));
+            validateReturnObject(arrayList.add(objects[i % 4]));
         
         assertTrue(arrayList.capacity() > 1024);
         assertFalse(arrayList.isEmpty());
         assertEquals(arrayList.size(), count);
         
         for (int i = 0; i < count; i++)
-            validateReturnObject(arrayList.remove(0));
+            validateReturnObject(arrayList.remove(0), objects[i % 4]);
         
         assertEquals(arrayList.capacity(), 0);
+        assertTrue(arrayList.isEmpty());
+        assertEquals(arrayList.size(), 0);
+    }
+    
+    @Test
+    public void addingAndRemoving2MillionObjectsToFromTailShouldNotFail() {
+        int count = 2000000;
+        for (int i = 0; i < count; i++)
+            validateReturnObject(arrayList.add(objects[i % 4]));
+        
+        assertFalse(arrayList.isEmpty());
+        assertEquals(arrayList.size(), count);
+        
+        for (int i = count - 1; i >= 0; i--)
+            validateReturnObject(arrayList.remove(i), objects[i % 4]);
+        
         assertTrue(arrayList.isEmpty());
         assertEquals(arrayList.size(), 0);
     }

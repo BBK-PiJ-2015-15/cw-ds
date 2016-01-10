@@ -5,7 +5,12 @@ import org.junit.*;
  * Implementation of the LinkedList test class.
  */
 public class LinkedListTest {
+    private Object[] objects;
     private LinkedList linkedList;
+    
+    public LinkedListTest() {
+        objects = new Object[] { 0, "some object", 128, "xpto" };
+    }
 
     @Before
     public void createLinkedList() {
@@ -63,17 +68,33 @@ public class LinkedListTest {
         assertFalse(linkedList.isEmpty());
         assertEquals(linkedList.size(), 3);
         
-        validateReturnObject(linkedList.remove(0));
+        validateReturnObject(linkedList.remove(0), 0);
         assertFalse(linkedList.isEmpty());
         assertEquals(linkedList.size(), 2);
         
         validateReturnObject(linkedList.get(0), 1);
-        validateReturnObject(linkedList.remove(1));
+        validateReturnObject(linkedList.remove(1), 2);
         assertFalse(linkedList.isEmpty());
         assertEquals(linkedList.size(), 1);
         
         validateReturnObject(linkedList.get(0), 1);
-        validateReturnObject(linkedList.remove(0));
+        validateReturnObject(linkedList.remove(0), 1);
+        assertTrue(linkedList.isEmpty());
+        assertEquals(linkedList.size(), 0);
+    }
+    
+    @Test
+    public void addingAndRemoving2MillionObjectsToFromTailShouldNotFail() {
+        int count = 2000000;
+        for (int i = 0; i < count; i++)
+            validateReturnObject(linkedList.add(objects[i % 4]));
+        
+        assertFalse(linkedList.isEmpty());
+        assertEquals(linkedList.size(), count);
+        
+        for (int i = 0; i < count; i++)
+            validateReturnObject(linkedList.remove(0), objects[i % 4]);
+        
         assertTrue(linkedList.isEmpty());
         assertEquals(linkedList.size(), 0);
     }
