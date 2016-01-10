@@ -93,7 +93,7 @@ public class ArrayList implements List {
 	 * If the index is negative, greater then or equal than the size of the
      * list, then an index out of bounds error message is returned.
      *
-     * Complexity: O(n).
+     * Complexity: O(1) if last element, otherwise O(n).
 	 * 
 	 * @param index The index of the item to be retrieved
 	 * @return The element or an appropriate error message, encapsulated in a
@@ -108,7 +108,7 @@ public class ArrayList implements List {
         Object item = this.items[index];
         
         // move items starting at the index by 1 position (if not last item)
-        if (this.size > 1) {
+        if (index != (this.size - 1)) {
             System.arraycopy(this.items, index + 1, this.items, index,
                 this.size - 1);
         }
