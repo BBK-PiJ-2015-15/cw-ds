@@ -72,7 +72,7 @@ public class LinkedList implements List {
 	 * If the index is negative, greater than or equal than the size of the
      * list, then an index out of bounds error message is returned.
      *
-     * Complexity: O(n).
+     * Complexity: O(1) if first or last element, otherwise O(n).
 	 * 
 	 * @param index The index of the item to be retrieved.
 	 * @return The element or an appropriate error message, encapsulated in a
@@ -83,13 +83,13 @@ public class LinkedList implements List {
         if (index < 0 || index >= this.size)
             return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
         
-        // find the node O(n)
+        // find the node
         Node node = find(index);
         
         // return the item
         return new ReturnObjectImpl(node.item);
     }
-
+    
 	/**
 	 * Removes the element at the given position from the list and returns it.
      * The indices of elements after the removed element are updated
@@ -98,7 +98,7 @@ public class LinkedList implements List {
 	 * If the index is negative, greater then or equal than the size of the
      * list, then an index out of bounds error message is returned.
 	 * 
-     * Complexity: O(n).
+     * Complexity: O(1) if first or last element, otherwise O(n).
      *
 	 * @param index The index of the item to be retrieved
 	 * @return The element or an appropriate error message, encapsulated in a
@@ -109,7 +109,7 @@ public class LinkedList implements List {
         if (index < 0 || index >= this.size)
             return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
         
-        // find the node O(n)
+        // find the node
         Node node = find(index);
         
         // update the pointers
@@ -140,7 +140,7 @@ public class LinkedList implements List {
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
      *
-     * Complexity: O(n).
+     * Complexity: O(1) if adding to head or tail, otherwise O(n).
 	 * 
 	 * @param index The index at which the item should be inserted.
 	 * @param item The element to be inserted.
@@ -156,7 +156,7 @@ public class LinkedList implements List {
         if (item == null)
             return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
         
-        // find the node O(n)
+        // find the node
         Node node = find(index);
         
         // create the new node
@@ -220,11 +220,17 @@ public class LinkedList implements List {
      * @param return The node at the given position.
      */
     protected Node find(int index) {
-        Node node = this.head;
-    
-        for (int i = 0; i < index; i++)
-            node = node.next;
+        Node node;
         
+        if (index == 0)
+            node = this.head;
+        else if (index == (this.size - 1))
+            node = this.tail;
+        else {
+            node = this.head;
+            for (int i = 0; i < index; i++)
+                node = node.next;
+        }
         return node;
     }
 }
