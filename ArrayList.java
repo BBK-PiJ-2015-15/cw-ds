@@ -34,6 +34,8 @@ public class ArrayList implements List {
     /**
      * The number of items the list can currently store.
      *
+     * Complexity: O(1).
+     *
      * @return The number of items.
      */
     public int capacity() {
@@ -43,6 +45,8 @@ public class ArrayList implements List {
 	/**
 	 * Check if the list is empty.
 	 * 
+     * Complexity: O(1).
+     *
 	 * @return True if the list is empty, false otherwise.
 	 */
 	public boolean isEmpty() {
@@ -52,6 +56,8 @@ public class ArrayList implements List {
 	/**
 	 * The number of items currently in the list.
 	 * 
+     * Complexity: O(1).
+     *
 	 * @return The number of items.
 	 */
 	public int size() {
@@ -64,6 +70,8 @@ public class ArrayList implements List {
 	 * If the index is negative, greater than or equal than the size of the
      * list, then an index out of bounds error message is returned.
 	 * 
+     * Complexity: O(1).
+     *
 	 * @param index The index of the item to be retrieved.
 	 * @return The element or an appropriate error message, encapsulated in a
      *         ReturnObject.
@@ -84,6 +92,8 @@ public class ArrayList implements List {
 	 * 
 	 * If the index is negative, greater then or equal than the size of the
      * list, then an index out of bounds error message is returned.
+     *
+     * Complexity: O(n).
 	 * 
 	 * @param index The index of the item to be retrieved
 	 * @return The element or an appropriate error message, encapsulated in a
@@ -125,6 +135,8 @@ public class ArrayList implements List {
 	 * 
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
+     *
+     * Complexity: O(n).
 	 * 
 	 * @param index The index at which the item should be inserted.
 	 * @param item The element to be inserted.
@@ -159,6 +171,8 @@ public class ArrayList implements List {
 	 * 
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
+     *
+     * Complexity: O(1) if enough capacity, O(n) if memory reallocated.
 	 * 
 	 * @param item The element to be inserted.
 	 * @return An empty ReturnObject if the operation is successful, an
@@ -185,6 +199,8 @@ public class ArrayList implements List {
      *
      * If the internal storage capacity is insuficient, this method will
      * increase the storage by a factor of 2 and copy over the data (if any).
+     *
+     * Complexity: O(n).
      *
      * @param minCapacity The minimum number of items it should have space to
      *        store.

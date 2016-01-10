@@ -31,6 +31,9 @@ public class LinkedList implements List {
 
     /**
      * The number of items currently stored.
+     *
+     * We could iterate over the list to get the size but for performance we
+     * save the current size in this member.
      */
     protected int size;
     
@@ -43,6 +46,8 @@ public class LinkedList implements List {
     
 	/**
 	 * Check if the list is empty.
+     *
+     * Complexity: O(1).
 	 * 
 	 * @return True if the list is empty, false otherwise.
 	 */
@@ -53,6 +58,8 @@ public class LinkedList implements List {
 	/**
 	 * The number of items currently in the list.
 	 * 
+     * Complexity: O(1).
+     *
 	 * @return The number of items.
 	 */
 	public int size() {
@@ -64,6 +71,8 @@ public class LinkedList implements List {
 	 * 
 	 * If the index is negative, greater than or equal than the size of the
      * list, then an index out of bounds error message is returned.
+     *
+     * Complexity: O(n).
 	 * 
 	 * @param index The index of the item to be retrieved.
 	 * @return The element or an appropriate error message, encapsulated in a
@@ -89,6 +98,8 @@ public class LinkedList implements List {
 	 * If the index is negative, greater then or equal than the size of the
      * list, then an index out of bounds error message is returned.
 	 * 
+     * Complexity: O(n).
+     *
 	 * @param index The index of the item to be retrieved
 	 * @return The element or an appropriate error message, encapsulated in a
      *         ReturnObject.
@@ -128,6 +139,8 @@ public class LinkedList implements List {
 	 * 
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
+     *
+     * Complexity: O(n).
 	 * 
 	 * @param index The index at which the item should be inserted.
 	 * @param item The element to be inserted.
@@ -165,6 +178,8 @@ public class LinkedList implements List {
     
 	/**
 	 * Adds an element to the end of the list.
+     *
+     * Complexity: O(1).
 	 * 
 	 * If a null object is provided, the request is ignored and an invalid
      * argument error message is returned.
@@ -198,6 +213,8 @@ public class LinkedList implements List {
     
     /**
      * Gets the node at the given position.
+     *
+     * Complexity: O(n).
      *
      * @param index The element index.
      * @param return The node at the given position.
