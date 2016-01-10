@@ -1,25 +1,36 @@
 /**
- * Implementation of a wrapper (ReturnObject) containing either an object (the
+ * Implementation of a wrapper structure containing either an object (the
  * result of an operation on a data structure) or an error value.
  *
  * @author Jose Massada
  */
 public class ReturnObjectImpl implements ReturnObject {
-    
+    /**
+     * The object. Can be null.
+     */
     private Object object;
+    /**
+     * The error message. Can be null.
+     */
     private ErrorMessage message;
 
+    /**
+     * Construct with an object.
+     */
     public ReturnObjectImpl(Object object) {
         this.object = object;
         this.message = ErrorMessage.NO_ERROR;
     }
     
+    /** 
+     * Construct with an error message.
+     */
     public ReturnObjectImpl(ErrorMessage message) {
         this.message = message;
     }
 
     /**
-	 * Returns whether there has been an error.
+	 * Check if there's an error message.
      *
 	 * @return True if there's an error, false otherwise.
 	 */
@@ -28,10 +39,9 @@ public class ReturnObjectImpl implements ReturnObject {
     }
 
     /**
-	 * Returns the error message. 
+	 * Gets the error message.
 	 * 
-	 * This method must return NO_ERROR if and only if
-	 * {@hasError} returns false.
+	 * This method returns NO_ERROR if and only if {@hasError} returns false.
 	 * 
 	 * @return The error message.
 	 */
@@ -40,11 +50,11 @@ public class ReturnObjectImpl implements ReturnObject {
     }
 
     /**
-	 * Returns the object wrapped in this ReturnObject, i.e. the
+	 * Gets the object wrapped in this ReturnObject, i.e. the
 	 * result of the operation if it was successful, or null if
 	 * there has been an error.
 	 * 
-	 * Note that the output of this method must be null if {@see
+	 * Note that the output of this method returns null if {@see
 	 * hasError} returns true, but the opposite is not true: if
 	 * {@see hasError} returns false, this method may or may not
 	 * return null.
