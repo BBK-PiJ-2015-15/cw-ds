@@ -7,7 +7,7 @@ public class LinkedList implements List {
     /**
      * A structure used to hold the object and it siblings.
      */
-    private class Node {
+    protected class Node {
         public Object item;
         public Node prev;
         public Node next;
@@ -22,17 +22,17 @@ public class LinkedList implements List {
     /**
      * The items head.
      */
-    private Node head;
+    protected Node head;
     
     /**
      * The items tail.
      */
-    private Node tail;
+    protected Node tail;
 
     /**
      * The number of items currently stored.
      */
-    private int size;
+    protected int size;
     
     /**
      * The default constructor.
@@ -202,7 +202,7 @@ public class LinkedList implements List {
      * @param index The element index.
      * @param return The node at the given position.
      */
-    private Node find(int index) {
+    protected Node find(int index) {
         Node node = this.head;
     
         for (int i = 0; i < index; i++)
