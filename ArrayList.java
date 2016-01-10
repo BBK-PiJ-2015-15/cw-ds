@@ -12,17 +12,17 @@ public class ArrayList implements List {
     /**
      * The items storage.
      */
-    private Object[] items;
+    protected Object[] items;
 
     /**
      * The number of items the list can currently store.
      */
-    private int capacity;
+    protected int capacity;
 
     /**
      * The number of items currently stored.
      */
-    private int size;
+    protected int size;
     
     /**
      * The default constructor.
@@ -140,8 +140,9 @@ public class ArrayList implements List {
         if (item == null)
             return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
         
-        // grow the internal storage if needed
-        grow();
+        // grow the internal storage
+        if (this.size == this.capacity)
+            ensureCapacity(this.size + 1);
         
         // move items starting at the index by 1 position
         System.arraycopy(this.items, index, this.items, index + 1, this.size);
@@ -168,8 +169,9 @@ public class ArrayList implements List {
         if (item == null)
             return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
         
-        // grow the internal storage if needed
-        grow();
+        // grow the internal storage
+        if (this.size == this.capacity)
+            ensureCapacity(this.size + 1);
         
         // copy the item and update the number of items in array
         this.items[this.size] = item;
@@ -179,20 +181,24 @@ public class ArrayList implements List {
     }
     
     /**
-     * Grows (if needed) the internal object storage by a factor of 2 and copies
-     * over the data (if any).
+     * Ensures that the internal storage can store a minimum number of items.
+     *
+     * If the internal storage capacity is insuficient, this method will
+     * increase the storage by a factor of 2 and copy over the data (if any).
+     *
+     * @param minCapacity The minimum number of items it should have space to
+     *        store.
      */
-    private void grow() {
-        // check if the internal storage needs to grow
-        if (this.size == this.capacity) {
-            // calculate new capacity
-            if (this.capacity == 0)
-                this.capacity = INITIAL_CAPACITY;
-            else
-                this.capacity *= 2;
-            
+    protected void ensureCapacity(int minCapacity) {
+        int capacity;
+        if (minCapacity < INITIAL_CAPACITY)
+            capacity = INITIAL_CAPACITY;
+        else
+            capacity = Integer.highestOneBit(minCapacity) << 1; // next powof2
+        
+        if (capacity > this.capacity) {
             // create a new array with the new capacity
-            Object[] items = new Object[this.capacity];
+            Object[] items = new Object[capacity];
             
             // copy the data
             if (this.items != null && this.size > 0)
@@ -200,6 +206,7 @@ public class ArrayList implements List {
             
             // update the array object to point to the new array
             this.items = items;
+            this.capacity = capacity;
         }
     }
 }
