@@ -29,6 +29,15 @@ public class StackImpl extends AbstractStack {
     }
     
     /**
+     * Gets the underlying data structure.
+     *
+     * @return THe underlying data structure.
+     */
+    public List list() {
+        return internalList;
+    }
+    
+    /**
 	 * Check if the list is empty.
 	 * 
 	 * @return True if the list is empty, false otherwise.
