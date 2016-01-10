@@ -1,5 +1,5 @@
 /**
- * Implementation of an array.
+ * Implementation of a linked list.
  * 
  * @author Jose Massada
  */
