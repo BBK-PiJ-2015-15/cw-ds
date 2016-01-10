@@ -92,8 +92,8 @@ public class LinkedListTest {
         assertFalse(linkedList.isEmpty());
         assertEquals(linkedList.size(), count);
         
-        for (int i = 0; i < count; i++)
-            validateReturnObject(linkedList.remove(0), objects[i % 4]);
+        for (int i = count - 1; i >= 0; i--)
+            validateReturnObject(linkedList.remove(i), objects[i % 4]);
         
         assertTrue(linkedList.isEmpty());
         assertEquals(linkedList.size(), 0);
